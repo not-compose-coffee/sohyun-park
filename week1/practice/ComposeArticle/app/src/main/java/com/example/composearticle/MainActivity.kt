@@ -49,14 +49,13 @@ private fun ArticleCard(
     shortDescription: String,
     longDescription: String,
     imagePainter: Painter,
-    modifier: Modifier = Modifier.fillMaxSize(),
+    modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier.fillMaxSize()
+    ) {
 
-        ) {
-
-        Image(painter = imagePainter, contentDescription = "")
+        Image(painter = imagePainter, contentDescription = "compose background")
         Text(text = title, fontSize = 24.sp, modifier = Modifier.padding(all = 16.dp))
         Text(
             text = shortDescription,
