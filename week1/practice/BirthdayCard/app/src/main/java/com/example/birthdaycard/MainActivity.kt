@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
-            BirthdayGreetingWithImage(stringResource(id = R.string.main_message), stringResource(id = R.string.main_from))
+            BirthdayGreetingWithImage(stringResource(R.string.main_message), stringResource(R.string.main_from))
         }
 
 
@@ -81,6 +81,6 @@ fun BirthdayGreetingWithImage(message: String, from: String, modifier: Modifier 
 @Composable
 fun BirthdayCardPreview() {
     BirthdayCardTheme {
-        BirthdayGreetingWithImage(stringResource(id = R.string.main_message), stringResource(id = R.string.main_from))
+        BirthdayGreetingWithImage(stringResource(R.string.main_message), stringResource(R.string.main_from))
     }
 }
