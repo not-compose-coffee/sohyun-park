@@ -7,9 +7,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,6 +21,7 @@ import com.example.tiptime.ui.theme.TipTimeTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.text.input.ImeAction
@@ -49,6 +48,7 @@ fun TipTimeScreen() {
 
     var amountInput by remember { mutableStateOf("") }
     var tipInput by remember { mutableStateOf("") }
+    var roundUp by remember { mutableStateOf(false) }
 
     val tipPercent = tipInput.toDoubleOrNull() ?: 0.0
     val amount = amountInput.toDoubleOrNull() ?: 0.0
@@ -91,6 +91,8 @@ fun TipTimeScreen() {
 
         )
 
+        RoundTheTipRow(roundUp = roundUp, onRoundUpChanged = { roundUp = it })
+
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
@@ -127,6 +129,33 @@ fun EditNumberField(
     )
 
 
+}
+
+@Composable
+fun RoundTheTipRow(
+    modifier: Modifier = Modifier,
+    roundUp: Boolean,
+    onRoundUpChanged: (Boolean) -> Unit
+) {
+
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .size(48.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
+        Text(stringResource(R.string.round_up_tip))
+
+        Switch(
+            checked = roundUp, onCheckedChange = onRoundUpChanged,
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentWidth(Alignment.End),
+            colors = SwitchDefaults.colors(uncheckedThumbColor = Color.DarkGray)
+        )
+
+    }
 }
 
 
