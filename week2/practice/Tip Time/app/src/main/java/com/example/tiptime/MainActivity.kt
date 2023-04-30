@@ -22,6 +22,7 @@ import com.example.tiptime.ui.theme.TipTimeTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import java.text.NumberFormat
 
@@ -66,13 +67,22 @@ fun TipTimeScreen() {
         EditNumberField(
             value = amountInput,
             onValueChange = { amountInput = it },
-            label = R.string.bill_amount
+            label = R.string.bill_amount,
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Next
+            )
         )
 
         EditNumberField(
             value = tipInput,
             onValueChange = { tipInput = it },
-            label = R.string.how_was_the_service
+            label = R.string.how_was_the_service,
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Done
+            )
+
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -92,7 +102,12 @@ fun TipTimeScreen() {
 
 
 @Composable
-fun EditNumberField(value: String, onValueChange: (String) -> Unit, @StringRes label: Int) {
+fun EditNumberField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    @StringRes label: Int,
+    keyboardOptions: KeyboardOptions
+) {
 
     TextField(
         value = value,
@@ -100,7 +115,7 @@ fun EditNumberField(value: String, onValueChange: (String) -> Unit, @StringRes l
         label = { Text(stringResource(label)) },
         modifier = Modifier.fillMaxWidth(),
         singleLine = true,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+        keyboardOptions = keyboardOptions
     )
 
 
