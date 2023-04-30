@@ -65,6 +65,8 @@ fun TipTimeScreen(modifier: Modifier = Modifier) {
 fun EditNumberField() {
 
     var amountInput by remember { mutableStateOf("") }
+    val amount = amountInput.toDoubleOrNull() ?: 0.0
+    val tip = calculateTip(amount)
 
     TextField(
         value = amountInput,
