@@ -3,6 +3,7 @@ package com.example.tiptime
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Surface
@@ -43,8 +44,12 @@ class MainActivity : ComponentActivity() {
 fun TipTimeScreen() {
 
     var amountInput by remember { mutableStateOf("") }
+    var tipInput by remember { mutableStateOf("") }
+
+    val tipPercent = tipInput.toDoubleOrNull() ?: 0.0
     val amount = amountInput.toDoubleOrNull() ?: 0.0
     val tip = calculateTip(amount)
+
 
     Column(
         modifier = Modifier.padding(32.dp),
@@ -58,7 +63,17 @@ fun TipTimeScreen() {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        EditNumberField(value = amountInput, onValueChange = { amountInput = it })
+        EditNumberField(
+            value = amountInput,
+            onValueChange = { amountInput = it },
+            label = R.string.bill_amount
+        )
+
+        EditNumberField(
+            value = tipInput,
+            onValueChange = { tipInput = it },
+            label = R.string.how_was_the_service
+        )
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -77,12 +92,12 @@ fun TipTimeScreen() {
 
 
 @Composable
-fun EditNumberField(value: String, onValueChange: (String) -> Unit) {
+fun EditNumberField(value: String, onValueChange: (String) -> Unit, @StringRes label: Int) {
 
     TextField(
         value = value,
         onValueChange = onValueChange,
-        label = { Text(stringResource(R.string.bill_amount)) },
+        label = { Text(stringResource(label)) },
         modifier = Modifier.fillMaxWidth(),
         singleLine = true,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
@@ -90,6 +105,7 @@ fun EditNumberField(value: String, onValueChange: (String) -> Unit) {
 
 
 }
+
 
 private fun calculateTip(amount: Double, tipPercent: Double = 15.0): String {
 
