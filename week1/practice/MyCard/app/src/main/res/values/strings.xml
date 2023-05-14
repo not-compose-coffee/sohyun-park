@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MyCard</string>
+    <string name="full_name">Sohyun Park</string>
+    <string name="title">Android Developer Extraordinaire</string>
+    <string name="phone_number">+82 (010) 111 222 333</string>
+    <string name="git_hub_id">sohyun127</string>
+    <string name="email_address">so405@naver.com</string>
+</resources>
